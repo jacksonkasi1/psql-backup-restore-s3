@@ -78,4 +78,6 @@ The server will automatically backup the database every day at 5 AM using a cron
 ## Notes
 
 - This application assumes you have PostgreSQL (pg_dump) installed and configured on your system.
+- Restore api commend does not execute on windows system. We recommend that you utilise the Linux operating system.
 - It's recommended to set up proper security measures for handling AWS credentials and environment variables.
+
