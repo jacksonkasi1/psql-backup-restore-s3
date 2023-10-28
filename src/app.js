@@ -15,7 +15,7 @@ const s3 = new AWS.S3({
   region: process.env.AWS_REGION,
 });
 
-app.get("/api/backup", async (req, res) => {
+app.post("/api/backup", async (req, res) => {
   try {
     const { bucket, folder, dbUrl } = req.query;
 
