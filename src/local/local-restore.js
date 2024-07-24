@@ -3,6 +3,11 @@ const path = require("path");
 const { exec } = require("child_process");
 
 function restoreLocalBackup(dbUrl, backupFileName) {
+  if (!backupFileName) {
+    console.error("No backup file name provided");
+    return;
+  }
+
   const filePath = path.join(__dirname, backupFileName);
 
   // Parsing the dbUrl
@@ -32,7 +37,7 @@ function restoreLocalBackup(dbUrl, backupFileName) {
 
 // Example usage
 const dbUrl = process.env.RESTORE_DB_URL;
-const backupFileName = 'backup_<TIMESTAMP>.sql'; // Replace <TIMESTAMP> with the actual timestamp
+const backupFileName = process.argv[2]; // Get backup file name from command line arguments
 restoreLocalBackup(dbUrl, backupFileName);
 
 module.exports = restoreLocalBackup;
