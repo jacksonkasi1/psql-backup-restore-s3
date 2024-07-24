@@ -31,7 +31,7 @@ psql-backup-restore-s3/
 1. **Clone the Repository:**
 
     ```bash
-    git clone https://github.com/your-username/psql-backup-restore-s3.git
+    git clone https://github.com/jacksonkasi1/psql-backup-restore-s3
     cd psql-backup-restore-s3
     ```
 

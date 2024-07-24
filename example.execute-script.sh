@@ -17,6 +17,7 @@ docker run -e BACKUP_DB_URL="$BACKUP_DB_URL" -v $(pwd)/src/local:/app/src/local 
 
 # Extract the latest backup file name
 LATEST_BACKUP=$(ls -Art src/local | grep backup_ | tail -n 1)
+echo "Latest backup file: $LATEST_BACKUP"
 
 # Build the Docker image for restore
 echo "Building the Docker image for restore..."

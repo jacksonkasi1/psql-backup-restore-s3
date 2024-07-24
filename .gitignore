@@ -6,5 +6,6 @@ pnpm-lock.yaml
 .env
 
 execute-script.sh
+multipart-execute-script.sh
 
 *.sql

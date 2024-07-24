@@ -10,6 +10,15 @@ function restoreLocalBackup(dbUrl, backupFileName) {
 
   const filePath = path.join(__dirname, backupFileName);
 
+  // Verify the backup file exists and log its size
+  if (!fs.existsSync(filePath)) {
+    console.error(`Backup file ${filePath} does not exist`);
+    return;
+  }
+
+  const fileSize = fs.statSync(filePath).size;
+  console.log(`Restoring from backup file: ${filePath} (${(fileSize / (1024 * 1024)).toFixed(2)} MB)`);
+
   // Parsing the dbUrl
   const parsedUrl = new URL(dbUrl);
   const username = parsedUrl.username;
@@ -24,13 +33,15 @@ function restoreLocalBackup(dbUrl, backupFileName) {
 
   exec(
     command,
-    { maxBuffer: 1024 * 1024 * 5000 }, // Set maxBuffer option to 5000 MB (adjust as needed)
+    { maxBuffer: 1024 * 1024 * 10240, timeout: 0 }, // Set maxBuffer option to 10 GB and disable timeout
     (error, stdout, stderr) => {
       if (error) {
         console.error(`exec error: ${error}`);
+        console.error(`stderr: ${stderr}`);
         return;
       }
       console.log("Database restored successfully!");
+      console.log(`stdout: ${stdout}`);
     }
   );
 }
