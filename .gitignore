@@ -4,3 +4,7 @@ package-lock.json
 yarn.lock
 pnpm-lock.yaml
 .env
+
+execute-script.sh
+
+*.sql
