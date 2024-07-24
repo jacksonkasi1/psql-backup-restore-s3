@@ -1,0 +1,12 @@
+{
+    "name": "psql-backup-restore",
+    "version": "1.0.0",
+    "description": "PostgreSQL Backup and Restore with pg_dump and pg_restore",
+    "main": "backup.js",
+    "scripts": {
+      "start": "node backup.js",
+      "restore": "node restore.js"
+    },
+    "dependencies": {}
+  }
+  
