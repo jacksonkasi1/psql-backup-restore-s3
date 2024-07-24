@@ -9,3 +9,4 @@ execute-script.sh
 multipart-execute-script.sh
 
 *.sql
+backup_*

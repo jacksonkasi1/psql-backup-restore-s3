@@ -1,6 +1,6 @@
 # PostgreSQL Backup and Restore with Multi-part Support
 
-This repository provides a solution for backing up and restoring PostgreSQL databases, including support for large databases with multi-part backups and the TimescaleDB extension.
+This repository provides a solution for backing up and restoring PostgreSQL databases, including support for large databases with multi-part backups.
 
 ## Multi-part Backup and Restore
 
@@ -9,7 +9,7 @@ To handle large databases efficiently, this solution uses the directory format w
 ### Features
 
 - **Multi-part Backup**: Uses PostgreSQL's directory format and parallel processing to create backups.
-- **Multi-part Restore**: Restores multi-part backups with support for TimescaleDB extensions.
+- **Multi-part Restore**: Restores multi-part backups efficiently.
 - **Dockerized**: The process is containerized to ensure consistency and portability.
 
 ### Files
@@ -23,7 +23,7 @@ To handle large databases efficiently, this solution uses the directory format w
 ### Requirements
 
 - Docker
-- PostgreSQL with TimescaleDB extension installed (on the target server for restore)
+- PostgreSQL installed on the target server for restore
 
 ### Usage
 
@@ -67,12 +67,18 @@ To handle large databases efficiently, this solution uses the directory format w
    - The script identifies the latest backup directory created during the backup process.
 
 4. **Running Restore**:
-   - The restore script (`multi-part-restore.js`) is executed within a Docker container, restoring the database from the multi-part backup with support for TimescaleDB extensions.
+   - The restore script (`multi-part-restore.js`) is executed within a Docker container, restoring the database from the multi-part backup.
 
 ### Troubleshooting
 
-- Ensure that the TimescaleDB extension is installed on the target PostgreSQL server where the database is being restored.
-- Verify that the backup directory contains the necessary backup files.
+- You may encounter errors related to missing extensions like TimescaleDB during the restore process. For example:
+  ```
+  pg_restore: error: could not execute query: ERROR:  extension "timescaledb" does not exist
+  Command was: COMMENT ON EXTENSION timescaledb IS 'Enables scalable inserts and complex queries for time-series data';
+  ```
+  These errors can be ignored if you are not using those extensions, and the rest of the data will still be restored correctly.
+
+- Ensure that the backup directory contains the necessary backup files.
 
 ### Contributing
 

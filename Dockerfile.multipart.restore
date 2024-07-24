@@ -18,14 +18,6 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y postgresql-client-16 postgresql-16
 
-# Install TimescaleDB extension
-RUN apt-get update && \
-    apt-get install -y apt-transport-https && \
-    curl -sSL https://packagecloud.io/timescale/timescaledb/gpgkey | apt-key add - && \
-    echo "deb https://packagecloud.io/timescale/timescaledb/debian/ buster main" | tee /etc/apt/sources.list.d/timescaledb.list && \
-    apt-get update && \
-    apt-get install -y timescaledb-2-postgresql-16
-
 # Make port 80 available outside of the container for the application to use
 EXPOSE 80
 
