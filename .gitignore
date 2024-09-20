@@ -10,3 +10,5 @@ multipart-execute-script.sh
 
 *.sql
 backup_*
+
+clean_db.sh
