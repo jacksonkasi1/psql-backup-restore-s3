@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as the base image
-FROM node:16.16.0
+FROM node:16.16.0-bullseye
 
 # Set the working directory in the container to /app
 WORKDIR /app
@@ -12,10 +12,11 @@ RUN npm install
 
 # Add the PostgreSQL repository and install client tools for PostgreSQL 16
 RUN apt-get update && \
-    apt-get install -y curl gpg gnupg2 software-properties-common apt-transport-https lsb-release ca-certificates && \
-    curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg && \
-    echo "deb http://apt.postgresql.org/pub/repos/apt `lsb_release -cs`-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
+    apt-get install -y curl gpg apt-transport-https && \
+    curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor -o /usr/share/keyrings/postgresql.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/postgresql.gpg] http://apt.postgresql.org/pub/repos/apt bullseye-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
     apt-get update && \
     apt-get install -y postgresql-client-16
 
-# Make port 80 available outside of
+# Expose port 80
+EXPOSE 80
